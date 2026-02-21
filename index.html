@@ -4,35 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ourMeals | Home</title>
+    <!-- <meta name="color-scheme" content="light dark"/> -->
 
     <link rel="stylesheet" href="src/styles.css">
 
 </head>
 <body>
 
-    <header>
-        <h1>Welcome to ourMeals!</h1>
-        <p>Your go-to platform for delicious recipes and meal planning.</p>
-    </header>
-
     <div class="container">
-      <h1>OurMeals</h1>
-      <p class="muted">Day 1: Save/Load + basic UI</p>
+      <header class="header">
+        <h1>OurMeals</h1>
+        <p class="muted">Save meals → plan week → grocery list</p>
+      </header>
 
-      <div class="card">
-        <div class="row">
-          <button id="addSample">Add sample meal</button>
-          <button id="reset">Reset</button>
+      <main class="grid">
+        <section class="card">
+          <h2>Meals</h2>
+
+          <form id="mealForm" class="form">
+            <label>
+              Meal name
+              <input id="mealName" type="text" placeholder="Tacos" required />
+            </label>
+
+            <label>
+              Ingredients (one per line)
+              <textarea id="mealIngredients" rows="5" placeholder="tortillas&#10;ground beef&#10;cheese"></textarea>
+            </label>
+
+            <div class="row">
+              <button type="submit">Add meal</button>
+              <button type="button" id="seedBtn">Add sample meals</button>
+              <button type="button" class="danger" id="resetBtn">Reset</button>
+            </div>
+          </form>
+
+          <hr class="sep" />
+
+          <div class="row space">
+            <div class="row">
+              <h3 class="no-margin">Your meals</h3>
+              <span id="mealCount" class="pill">0</span>
+            </div>
+
+            <input id="search" class="search" type="search" placeholder="Search meals or ingredients…" />
+          </div>
+
+          <ul id="mealList" class="list"></ul>
+
+          <p id="emptyHint" class="muted">
+            Add a few meals to get started. Keep it simple: “Tacos”, “Spaghetti”, “Stir Fry”.
+          </p>
+        </section>
+
+        <section class="card" id="weekCard">
+        <div class="row space">
+            <h2 class="no-margin">Week Plan</h2>
+            <button type="button" id="generateWeekBtn">Generate Week</button>
         </div>
 
-        <h2>State</h2>
-        <pre id="stateView"></pre>
-      </div>
+        <p id="weekHint" class="muted">Add at least 1 meal, then generate your week.</p>
+
+        <ol id="weekList" class="week"></ol>
+
+        <div class="row">
+            <button type="button" id="clearWeekBtn">Clear Week</button>
+        </div>
+        </section>
+
+        <section class="card" id="groceryCard">
+        <div class="row space">
+            <h2 class="no-margin">Grocery List</h2>
+            <button type="button" id="generateGroceryBtn">Generate List</button>
+        </div>
+
+        <p id="groceryHint" class="muted">Generate a week plan first, then build your grocery list.</p>
+
+        <div class="row">
+            <button type="button" id="copyGroceryBtn">Copy List</button>
+            <button type="button" id="clearGroceryBtn">Clear List</button>
+        </div>
+
+        <ul id="groceryList" class="grocery"></ul>
+        </section>
+      </main>
     </div>
 
+    <!-- Edit Modal -->
+    <div id="modalBackdrop" class="modal-backdrop hidden"></div>
+    <div id="editModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3 class="no-margin">Edit meal</h3>
+        <button id="closeModal" type="button">✕</button>
+      </div>
+
+      <form id="editForm" class="form">
+        <label>
+          Meal name
+          <input id="editName" type="text" required />
+        </label>
+
+        <label>
+          Ingredients (one per line)
+          <textarea id="editIngredients" rows="6"></textarea>
+        </label>
+
+        <div class="row">
+          <button type="submit">Save</button>
+          <button id="deleteFromModal" type="button" class="danger">Delete</button>
+        </div>
+      </form>
+    </div>
+
+    
+    
     <script src="src/js/app.js"></script>
-
-
 
     <footer>
         <p>Developer >> <a href="https://www.mattbramer.com" target="_blank">Matt Bramer</a></p>
