@@ -4,36 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ourMeals | Home</title>
-    <!-- <meta name="color-scheme" content="light dark"/> -->
-
     <link rel="stylesheet" href="src/styles.css">
-
 </head>
 <body>
+    <div class="app-shell">
+      <div class="app-glow app-glow-one" aria-hidden="true"></div>
+      <div class="app-glow app-glow-two" aria-hidden="true"></div>
 
-    <div class="container">
-      <header class="header">
-        <h1>OurMeals</h1>
-        <p class="muted">Save meals → plan week → grocery list</p>
+      <div class="container">
+      <header class="hero card">
+        <div class="eyebrow">Meal planning for two</div>
+        <div class="hero-top">
+          <div>
+            <h1>OurMeals</h1>
+            <p class="hero-copy">A one-stop spot to decide dinner faster, build a weekly plan, and turn it into a grocery list that works on your phones.</p>
+          </div>
+          <div class="hero-badge">Phone-first</div>
+        </div>
+
+        <div class="hero-stats" aria-label="Meal planning overview">
+          <div class="stat">
+            <span class="stat-label">Meals saved</span>
+            <strong id="statMeals">0</strong>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Week planned</span>
+            <strong id="statPlanned">0/7</strong>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Groceries</span>
+            <strong id="statGroceries">0</strong>
+          </div>
+        </div>
       </header>
 
       <main class="grid">
+        <section class="card spotlight-card" id="decisionCard">
+          <div class="row space section-head">
+            <div>
+              <div class="eyebrow">Dinner helper</div>
+              <h2 class="no-margin">What should we eat tonight?</h2>
+            </div>
+            <button type="button" id="pickDinnerBtn" class="primary">Pick for us</button>
+          </div>
+
+          <div class="spotlight-panel">
+            <div>
+              <p id="decisionLabel" class="muted no-margin">Add a few meals and let OurMeals break the dinner deadlock.</p>
+              <h3 id="decisionMeal" class="spotlight-meal">No meal picked yet</h3>
+              <p id="decisionIngredients" class="spotlight-ingredients">Your saved meal ideas will show up here with a quick ingredient preview.</p>
+            </div>
+            <div class="row spotlight-actions">
+              <button type="button" id="saveTonightBtn">Plan for today</button>
+              <button type="button" id="regenerateDinnerBtn">Another idea</button>
+            </div>
+          </div>
+        </section>
+
         <section class="card">
-          <h2>Meals</h2>
+          <div class="section-head">
+            <div class="eyebrow">Meal bank</div>
+            <h2>Meals</h2>
+          </div>
 
           <form id="mealForm" class="form">
             <label>
               Meal name
-              <input id="mealName" type="text" placeholder="Tacos" required />
+              <input id="mealName" type="text" placeholder="Crispy chicken tacos" required />
             </label>
 
             <label>
               Ingredients (one per line)
-              <textarea id="mealIngredients" rows="5" placeholder="tortillas&#10;ground beef&#10;cheese"></textarea>
+              <textarea id="mealIngredients" rows="5" placeholder="tortillas&#10;ground beef&#10;cheese&#10;lettuce"></textarea>
             </label>
 
             <div class="row">
-              <button type="submit">Add meal</button>
+              <button type="submit" class="primary">Add meal</button>
               <button type="button" id="seedBtn">Add sample meals</button>
               <button type="button" class="danger" id="resetBtn">Reset</button>
             </div>
@@ -58,36 +104,45 @@
         </section>
 
         <section class="card" id="weekCard">
-        <div class="row space">
-            <h2 class="no-margin">Week Plan</h2>
-            <button type="button" id="generateWeekBtn">Generate Week</button>
-        </div>
+          <div class="row space section-head">
+              <div>
+                <div class="eyebrow">Weekly rhythm</div>
+                <h2 class="no-margin">Week Plan</h2>
+              </div>
+              <button type="button" id="generateWeekBtn">Generate Week</button>
+          </div>
 
-        <p id="weekHint" class="muted">Add at least 1 meal, then generate your week.</p>
+          <p id="weekHint" class="muted">Add at least 1 meal, then generate your week.</p>
 
-        <ol id="weekList" class="week"></ol>
+          <ol id="weekList" class="week"></ol>
 
-        <div class="row">
-            <button type="button" id="clearWeekBtn">Clear Week</button>
-        </div>
+          <div class="row">
+              <button type="button" id="clearWeekBtn">Clear Week</button>
+          </div>
         </section>
 
         <section class="card" id="groceryCard">
-        <div class="row space">
-            <h2 class="no-margin">Grocery List</h2>
-            <button type="button" id="generateGroceryBtn">Generate List</button>
-        </div>
+          <div class="row space section-head">
+              <div>
+                <div class="eyebrow">Shopping mode</div>
+                <h2 class="no-margin">Grocery List</h2>
+              </div>
+              <button type="button" id="generateGroceryBtn">Generate List</button>
+          </div>
 
-        <p id="groceryHint" class="muted">Generate a week plan first, then build your grocery list.</p>
+          <p id="groceryHint" class="muted">Generate a week plan first, then build your grocery list.</p>
 
-        <div class="row">
-            <button type="button" id="copyGroceryBtn">Copy List</button>
-            <button type="button" id="clearGroceryBtn">Clear List</button>
-        </div>
+          <div id="grocerySummary" class="grocery-summary hidden"></div>
 
-        <ul id="groceryList" class="grocery"></ul>
+          <div class="row">
+              <button type="button" id="copyGroceryBtn">Copy List</button>
+              <button type="button" id="clearGroceryBtn">Clear List</button>
+          </div>
+
+          <ul id="groceryList" class="grocery"></ul>
         </section>
       </main>
+      </div>
     </div>
 
     <!-- Edit Modal -->
